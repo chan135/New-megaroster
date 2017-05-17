@@ -28,6 +28,13 @@ const megaroster = {
     // this.students.splice(?, 1)
   },
 
+  promoteStudent(ev) {
+    const stu = ev.target.parentNode.parentNode
+    let colors = "#" + Math.floor(Math.random() * 0xFFFFFF).toString(16)
+    stu.style.border = "thick solid " + colors
+    
+  },
+
   addStudent(ev) {
     ev.preventDefault()
     const f = ev.target
@@ -58,6 +65,11 @@ const megaroster = {
     li
       .querySelector('button.remove')
       .addEventListener('click', this.removeStudent.bind(this))
+
+    li
+      .querySelector('button.promote')
+      .addEventListener('click', this.promoteStudent.bind(this))
+
     return li
   },
 
