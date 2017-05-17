@@ -18,7 +18,12 @@ const megaroster = {
   removeStudent(ev) {
     const btn = ev.target
     btn.closest('.student').remove()
-
+    const stu = ev.target.parentNode.parentNode.dataset.id
+    megaroster.students.splice(stu -1, 1)
+    for (let a = stu -1; a < megaroster.students.length; a++) {
+      megaroster.students[a].id -= 1
+    }
+    //console.log(ev)
     // Remove it from the this.students array
     // this.students.splice(?, 1)
   },
@@ -30,7 +35,7 @@ const megaroster = {
       id: this.max + 1,
       name: f.studentName.value,
     }
-    this.students.unshift(student)
+    this.students.push(student)
 
     const listItem = this.buildListItem(student)
     this.prependChild(this.studentList, listItem)
