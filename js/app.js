@@ -23,6 +23,7 @@ const megaroster = {
     for (let a = stu -1; a < megaroster.students.length; a++) {
       megaroster.students[a].id -= 1
     }
+    this.max --
     //console.log(ev)
     // Remove it from the this.students array
     // this.students.splice(?, 1)
@@ -35,6 +36,18 @@ const megaroster = {
     
   },
 
+  moveUp(ev) {
+    const stu = ev.target.parentNode.parentNode
+    if (stu.previousSibling) {
+      stu.parentNode.insertBefore(stu, stu.previousSibling)
+    }
+  },
+
+  moveDown(ev) {
+    const stu = ev.target.parentNode.parentNode
+    stu.nextSibling.parentNode.insertBefore(stu, stu.nextSibling.nextSibling)
+  },
+
   addStudent(ev) {
     ev.preventDefault()
     const f = ev.target
@@ -43,7 +56,7 @@ const megaroster = {
       name: f.studentName.value,
     }
     this.students.push(student)
-
+    
     const listItem = this.buildListItem(student)
     this.prependChild(this.studentList, listItem)
 
@@ -69,6 +82,14 @@ const megaroster = {
     li
       .querySelector('button.promote')
       .addEventListener('click', this.promoteStudent.bind(this))
+
+    li  
+      .querySelector('button.up')
+      .addEventListener('click', this.moveUp.bind(this))
+
+    li
+      .querySelector('button.down')
+      .addEventListener('click', this.moveDown.bind(this))
 
     return li
   },
